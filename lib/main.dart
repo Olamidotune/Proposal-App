@@ -12,11 +12,28 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+        debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+            fontFamily: 'McLaren',
+            // scaffoldBackgroundColor: BLACK,
+            useMaterial3: true,
+            textTheme: const TextTheme(
+              bodyMedium: TextStyle(
+                fontSize: 14,
+              ),
+              bodySmall: TextStyle(
+                fontSize: 12,
+                color: Colors.amber,
+              ),
+              titleLarge: TextStyle(color: Colors.black),
+              titleMedium: TextStyle(color: Colors.black),
+              titleSmall: TextStyle(color: Colors.black),
+              displayLarge: TextStyle(color: Colors.black),
+              displayMedium: TextStyle(color: Colors.black),
+              displaySmall: TextStyle(color: Colors.black),
+            ),
+          ),
       home:HomeScreen());
   }
 }

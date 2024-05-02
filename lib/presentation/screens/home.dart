@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:that_app/presentation/widgets/hero.dart';
 import 'package:video_player/video_player.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -12,23 +13,25 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late VideoPlayerController _controller;
-  late ScrollController _scrollController;
-  double _opacity = 0.0;
+  bool _showProgressIndicator = true;
 
   @override
   void initState() {
     super.initState();
     _controller = VideoPlayerController.asset('assets/videos/her.MP4')
       ..initialize().then((_) {
-        setState(() {});
+        setState(() {
+          _controller.play();
+        }); // Trigger a rebuild to show the video
       });
 
-    _scrollController = ScrollController()
-      ..addListener(() {
+    Future.delayed(Duration(seconds: 3), () {
+      if (mounted) {
         setState(() {
-          _opacity = 1.0;
+          _showProgressIndicator = false;
         });
-      });
+      }
+    });
   }
 
   @override
@@ -37,107 +40,98 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Colors.pink.shade200,
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: Colors.pink.shade100,
         title: Text(
-          "Hey Baby, Will You Be My Girlfriend? 💕",
-          style: textTheme.bodyText1,
+          "TO MY WOMAN..💕",
+          style: textTheme.bodyLarge!.copyWith(fontSize: 20, fontWeight: FontWeight.bold),
         ),
       ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          controller: _scrollController,
-          physics: BouncingScrollPhysics(),
-          child: Column(
-            children: [
-              Image.asset(
-                "assets/images/IMG_7115.jpeg",
+      body: Stack(
+        children: [
+          if (_showProgressIndicator)
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  CircularProgressIndicator(),
+                  Text(
+                    "Initiating love...",
+                  ),
+                ],
               ),
-              SizedBox(
-                height: 5,
+            ),
+          AnimatedOpacity(
+            curve: Curves.easeInCirc,
+            duration: Duration(milliseconds: 500),
+            opacity: _showProgressIndicator ? 0.0 : 1.0,
+            child: SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
+              child: Column(
+                children: [
+                  HeroPicture(
+                    fileName: 'assets/images/her.jpeg',
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: Text(
+                      "\nMy Dearest Oyebuokola,\n",
+                      textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 17),
+                    ),
+                  ),
+                  HeroPicture(fileName: "assets/images/her1.JPG"),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: Text(
+                      "\nAs I sit down to write these words, my heart is full with love for you. You've provided me joy, laughing, and boundless delight since we first met. My love for you grows stronger and deeper with each passing day.\n",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 17),
+                    ),
+                  ),
+            HeroPicture(fileName: "assets/images/her2.jpeg"),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: Text(
+                      "\nRemember when we first met on April 25th, 2024, as I saw you enter the door of the restaurant from where I sat, the anxiety I had before arriving to the place turned into pure bliss, you walked closer and I got up to hug you, that was the time I thought to myself \n'Dotun, na she be this' 😹😹😹\n",
+                      textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 17),
+                    ),
+                  ),
+                   HeroPicture(fileName: "assets/images/her3.jpeg"),
+
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: Text(
+                      "\nOyebukola, you are the missing piece to my puzzle, the yin to my yang. With you by my side, I feel complete. Your unwavering support, your boundless kindness, and your genuine compassion have made me a better person. I cherish every moment we spend together, whether it's exploring new places, having deep conversations, or simply enjoying each other's company.\n",
+                      textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 17),
+                    ),
+                  ),
+                  Center(
+                    child: _controller.value.isInitialized
+                        ? AspectRatio(
+                            aspectRatio: _controller.value.aspectRatio,
+                            child: VideoPlayer(_controller),
+                          )
+                        : CircularProgressIndicator(),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: Text(
+                      '\nYou have captured my heart, and I would be the luckiest person in the world if you chose to keep it. My love for you knows no bounds, and I will spend every day showing you how much you mean to me.\n I ask humbly ... "Please may you be my girlfriend? (Offically)🥰"',
+                      textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 17),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 100,
+                  )
+                ],
               ),
-              AnimatedOpacity(
-                duration: Duration(milliseconds: 500),
-                opacity: _opacity,
-                child: Text(
-                  "My Dearest Oyebuokola,\n",
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              // Add null check before accessing _scrollController
-              AnimatedOpacity(
-                duration: Duration(milliseconds: 500),
-                opacity: _opacity,
-                child: Image.asset(
-                  "assets/images/her1.JPG",
-                ),
-              ),
-              AnimatedOpacity(
-                duration: Duration(milliseconds: 500),
-                opacity: _opacity,
-                child: Text(
-                  "As I sit down to pen these words, my heart is overflowing with love for you. From the moment we met, you've brought joy, laughter, and endless happiness into my life. With each passing day, my love for you has grown deeper and more profound.\n",
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              AnimatedOpacity(
-                duration: Duration(milliseconds: 500),
-                opacity: _opacity,
-                child: Image.asset(
-                  "assets/images/her2.jpeg",
-                ),
-              ),
-              AnimatedOpacity(
-                duration: Duration(milliseconds: 500),
-                opacity: _opacity,
-                child: Text(
-                  "Today, I come before you with a heart full of hope and a question that has been on my mind for a long time. [Insert personal anecdote or memory that highlights your relationship]. In you, I've found my soulmate, my confidant, and my best friend.\n",
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              AnimatedOpacity(
-                duration: Duration(milliseconds: 500),
-                opacity: _opacity,
-                child: Image.asset(
-                  "assets/images/her3.jpeg",
-                ),
-              ),
-              AnimatedOpacity(
-                duration: Duration(milliseconds: 500),
-                opacity: _opacity,
-                child: Text(
-                  "Oyebuokola, will you do me the incredible honor of spending the rest of your life with me? Will you be my partner in all things, through the highs and lows, the laughter and tears? I can't imagine my life without you by my side, and I promise to cherish and adore you for all eternity.\n",
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              Center(
-                child: _controller.value.isInitialized
-                    ? AspectRatio(
-                        aspectRatio: _controller.value.aspectRatio,
-                        child: VideoPlayer(_controller),
-                      )
-                    : CircularProgressIndicator(),
-              ),
-              AnimatedOpacity(
-                duration: Duration(milliseconds: 500),
-                opacity: _opacity,
-                child: Text(
-                  "With all my love,\n"
-                  "Olamidotun",
-                  textAlign: TextAlign.center,
-                ),
-              )
-            ],
+            ),
           ),
-        ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -158,5 +152,30 @@ class _HomeScreenState extends State<HomeScreen> {
   void dispose() {
     super.dispose();
     _controller.dispose();
+  }
+}
+
+class HeroPicture extends StatelessWidget {
+  final String fileName;
+  const HeroPicture({
+    super.key,
+    required this.fileName,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => ZoomableImage(imagePath: fileName),
+        ));
+      },
+      child: Hero(
+        tag: fileName,
+        child: Image.asset(
+          fileName,
+        ),
+      ),
+    );
   }
 }
