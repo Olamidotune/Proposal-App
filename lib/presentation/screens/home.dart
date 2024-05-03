@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
     _controller = VideoPlayerController.asset('assets/videos/her.MP4')
       ..initialize().then((_) {
         setState(() {
-          _controller.play();
+         
         }); // Trigger a rebuild to show the video
       });
 
@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
+    // final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       backgroundColor: Colors.pink.shade200,
       appBar: AppBar(
@@ -44,7 +44,6 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.pink.shade100,
         title: Text(
           "TO MY WOMAN..💕",
-          style: textTheme.bodyLarge!.copyWith(fontSize: 20, fontWeight: FontWeight.bold),
         ),
       ),
       body: Stack(

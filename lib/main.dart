@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
               ),
               bodySmall: TextStyle(
                 fontSize: 12,
-                color: Colors.amber,
+                color: Colors.black,
               ),
               titleLarge: TextStyle(color: Colors.black),
               titleMedium: TextStyle(color: Colors.black),
@@ -34,6 +34,6 @@ class MyApp extends StatelessWidget {
               displaySmall: TextStyle(color: Colors.black),
             ),
           ),
-      home:HomeScreen());
+      home:const HomeScreen());
   }
 }

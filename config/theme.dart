@@ -7,7 +7,7 @@ class AppTheme {
     return ThemeData(
       useMaterial3: true,
       colorScheme: _colorSheme,
-      textTheme: _textTheme,
+      // textTheme: _textTheme,
       inputDecorationTheme: _inputDecorationTheme,
       filledButtonTheme: _filledButtonTheme,
     );
@@ -28,9 +28,11 @@ class AppTheme {
         onSurface: Colors.black);
   }
 
-  static TextTheme get _textTheme {
-    return const TextTheme(titleLarge: TextStyle(fontSize: 30));
-  }
+  // static TextTheme get _textTheme {
+  //   return const TextTheme(
+      
+  //     titleLarge: TextStyle(fontSize: 30));
+  // }
 
   static InputDecorationTheme get _inputDecorationTheme {
     return InputDecorationTheme(
