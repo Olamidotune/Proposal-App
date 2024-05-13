@@ -36,7 +36,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       backgroundColor: Colors.pink.shade200,
       appBar: AppBar(
@@ -80,6 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   HeroPicture(fileName: "assets/images/her1.JPG"),
+                  
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
                     child: Text(
@@ -123,6 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               style: TextStyle(fontSize: 17),
                     ),
                   ),
+                    HeroPicture(fileName: "assets/images/her5.jpeg"),
                   SizedBox(
                     height: 100,
                   )

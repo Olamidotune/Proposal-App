@@ -16,7 +16,6 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             visualDensity: VisualDensity.adaptivePlatformDensity,
             fontFamily: 'McLaren',
-            // scaffoldBackgroundColor: BLACK,
             useMaterial3: true,
             textTheme: const TextTheme(
               bodyMedium: TextStyle(
